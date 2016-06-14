@@ -34,8 +34,8 @@ main :: IO ()
 main = do
   file <- readFile "problem3.input"
   let eval  = processMoves file
-  let evS = processMoves . fst . splitList $ file
-  let evR = processMoves . snd . splitList $ file
+      evS = processMoves . fst . splitList $ file
+      evR = processMoves . snd . splitList $ file
   print . M.size $ eval
   print . M.size $ M.union evS evR
   where processMoves = fst . foldl insertAndMove emptyAccum
