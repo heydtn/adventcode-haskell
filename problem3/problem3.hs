@@ -1,7 +1,7 @@
 import qualified Data.Map as M
 
-type HouseMap = M.Map (Int, Int) Bool
-type Position = (Int, Int)
+type HouseMap    = M.Map (Int, Int) Bool
+type Position    = (Int, Int)
 type Accumulator = (HouseMap, Position)
 
 movPos :: Position -> Char -> Position
@@ -25,17 +25,17 @@ insertAndMove  :: Accumulator -> Char -> Accumulator
 insertAndMove (m, p) c = (\x -> (M.insert x True m, x)) $ movPos p c
 
 splitList :: [a] -> ([a], [a])
-splitList []  = ([], [])
-splitList [x] = ([x], [])
+splitList []       = ([], [])
+splitList [x]      = ([x], [])
 splitList (x:y:zs) = (x:xs, y:ys)
-  where (xs, ys) = splitList zs
+  where (xs, ys)   = splitList zs
 
 main :: IO ()
 main = do
   file <- readFile "problem3.input"
-  let eval  = processMoves file
-      evS = processMoves . fst . splitList $ file
-      evR = processMoves . snd . splitList $ file
+  let eval = processMoves file
+      evS  = processMoves . fst . splitList $ file
+      evR  = processMoves . snd . splitList $ file
   print . M.size $ eval
   print . M.size $ M.union evS evR
   where processMoves = fst . foldl insertAndMove emptyAccum
