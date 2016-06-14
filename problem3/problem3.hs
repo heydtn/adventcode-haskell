@@ -22,7 +22,8 @@ emptyAccum :: Accumulator
 emptyAccum = (emptyMap, (emptyPos, emptyPos), False)
 
 insertAndMove2 :: Accumulator -> Char -> Accumulator
-insertAndMove2 (m, (p1,p2), s) c = case s of
+insertAndMove2 (m, (p1,p2), s) c =
+  case s of
     True  -> (\x -> (M.insert x True m, (p1, x), False)) $ movPos p2 c
     False -> (\x -> (M.insert x True m, (x, p2), True )) $ movPos p1 c
 
