@@ -1,3 +1,5 @@
+-- Easily scalable to n-dimensional presents
+
 import Data.List (sort, subsequences)
 import Data.List.Split (splitOn)
 
